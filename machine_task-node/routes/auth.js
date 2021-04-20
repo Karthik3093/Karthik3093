@@ -7,13 +7,11 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  const userLogin = await User.findOne({ email });
+  const userLogin = await User.findOne({ email});
   if (!userLogin) return res.status(400).send("Invalid Email or Password");
-  const token = await userLogin.generateAuthToken();
-  
-
   const validPassword = await bcrypt.compare(password, userLogin.password);
   if (!validPassword) return res.status(400).send("Invalid Email or Password");
+  const token = await userLogin.generateAuthToken();
   res.send(token);
 });
 

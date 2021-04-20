@@ -2,12 +2,14 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const User = require("../models/user");
 const express = require("express");
+const user = require("../models/user");
 const router = express.Router();
 
-// router.get("/", auth, async (req, res) => {
-// const user = await User.findById(req.user._id).select("-password");
-// res.send(user);
-// });
+router.get("/", async(req, res) => {
+  const getUser= await User.find(user);
+res.send(getUser);
+
+});
 
 router.post("/", async (req, res) => {
 let user = new User({
