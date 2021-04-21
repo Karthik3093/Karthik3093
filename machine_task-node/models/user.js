@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
+//here we can generate the json web token
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
